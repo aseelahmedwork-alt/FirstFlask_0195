@@ -12,7 +12,15 @@ def index():
         age = request.form.get('age', '').strip()
 
         if name and age:
-            message = f'Hello, {name}! You are {age} years old.'
+            try:
+                age = int(age)
+
+                if age > 0:
+                    message = f'Hello, {name}! You are {age} years old.'
+                else:
+                    message = 'Please enter a valid age.'
+            except ValueError:
+                message = 'Please enter a valid age.'
         else:
             message = 'Please enter your name and age.'
 
